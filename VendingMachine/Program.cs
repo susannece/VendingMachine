@@ -38,13 +38,11 @@ namespace VendingMachine
                             for(int i = 0; i < drinks.Length; i++)
                                 Console.WriteLine(i + " " + drinks[i].Examine());
                             Console.WriteLine("Vilken dricka vill du ha?");
+
                             int drinkChoice = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine("Betala {0} kr", drinks[drinkChoice].Price);
-
-                            //      int[] coinUnits = { 100, 50, 20, 10, 5, 2, 1 };
                             double paydMoney = Convert.ToDouble(Console.ReadLine());
                             service.InsertMoney(paydMoney - drinks[drinkChoice].Price);
-                    //        service.InsertMoney(service.MoneyPool - drinks[drinkChoice].Price);
                             Console.WriteLine("Du har {0} kr kvar. ", service.MoneyPool);
                             drinks[drinkChoice].Use();
 
@@ -67,8 +65,12 @@ namespace VendingMachine
                             break;
 
                         case 8:
-                           // Dictionary<int, int> change = service.EndTransaction();
-                           // Console.WriteLine("Din växel är {0} kr.", change);
+                            Console.WriteLine("Din växel: ");
+                            change = service.EndTransaction();
+                            foreach (KeyValuePair<int, int> kvp in change)
+                            {
+                                Console.WriteLine("{0} kr sedel/mynt {1} st", kvp.Key, kvp.Value);
+                            }
                             break;
 
                         case 9:
