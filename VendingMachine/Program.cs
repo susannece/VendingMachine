@@ -15,8 +15,8 @@ namespace VendingMachine
             List<String> drinkListInfo = new List<String>();
             foreach (Product drink in drinks) drinkListInfo.Add(drink.Examine());
 
-            int[] coinUnits = new int[] { 100, 50, 20, 10, 5, 2, 1 };
-            VendingMachineService service = new VendingMachineService(coinUnits);
+          //  int[] coinUnits = new int[] { 100, 50, 20, 10, 5, 2, 1 };
+            VendingMachineService service = new VendingMachineService();
             Dictionary<int, int> change = new Dictionary<int, int>();
 
             bool keepLive = true;
@@ -45,7 +45,7 @@ namespace VendingMachine
                             double paydMoney = Convert.ToDouble(Console.ReadLine());
                             service.InsertMoney(paydMoney - drinks[drinkChoice].Price);
                     //        service.InsertMoney(service.MoneyPool - drinks[drinkChoice].Price);
-                            Console.WriteLine("Du har {0} kvar. ", service.MoneyPool);
+                            Console.WriteLine("Du har {0} kr kvar. ", service.MoneyPool);
                             drinks[drinkChoice].Use();
 
                             if(service.MoneyPool == 0)
@@ -60,18 +60,8 @@ namespace VendingMachine
                                 change = service.EndTransaction();
                                 foreach (KeyValuePair<int, int> kvp in change)
                                 {
-                                    Console.WriteLine("{0} sedel/mynt {1} st", kvp.Key, kvp.Value);
+                                    Console.WriteLine("{0} kr sedel/mynt {1} st", kvp.Key, kvp.Value);
                                 }
-                             /*   foreach (int i in coinUnits)
-                                {
-                                    if (((int)(moneyPool / i)) != 0)
-                                    {
-                                        Console.WriteLine(i + " sedel/mynt = " + (int)(moneyPool / i));
-                                    }
-                                    moneyPool = moneyPool % i;
-                                }
-                             */
-
                             }
 
                             break;
