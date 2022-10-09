@@ -17,7 +17,15 @@ namespace VendingMachineTest
 
             actChange = service.EndTransaction();
             Assert.Equal(expChange, actChange);
+        }
 
+        [Fact]
+        public void InsertMoneyTest()
+        {
+            VendingMachineService service = new VendingMachineService();
+            double exp = 22;
+            service.InsertMoney(exp);
+            Assert.Equal(exp, service.MoneyPool);
         }
     }
 }
